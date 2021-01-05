@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 class App extends React.Component {
   state = {
@@ -6,10 +7,12 @@ class App extends React.Component {
     // movies: []
   };
 
-  componentDidMount() {
-    setTimeout(() => { // setTimeout은 react 것이 아니라 javascript 것임.
-      this.setState({ isLoading: false });
-    }, 5000);
+  getMovies = async () => {
+    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+  }
+
+  componentDidMount() { // 이 컴포넌트가 처음 render 됐다는 것을 알려주는 메소드
+    this.getMovies();
   }
 
   render() {
